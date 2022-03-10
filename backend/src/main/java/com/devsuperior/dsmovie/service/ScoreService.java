@@ -28,7 +28,7 @@ public class ScoreService {
 	private double sum = 0.0;
 	
 	@Transactional
-	public void saveScore(ScoreDto scoreDto) {
+	public MovieDto saveScore(ScoreDto scoreDto) {
 
 		User user = userRepository.findByEmail(scoreDto.getEmail());
 		if (user == null) {
@@ -46,21 +46,14 @@ public class ScoreService {
 		score.setValue(scoreDto.getScore());
 		
 		scoreRepository.saveAndFlush(score);
-		/*
-		//movie.getScores().forEach(x -> sum += x.getValue());
-		for (Score s : movie.getScores()) {
-			sum = sum + s.getValue();
-		}
-		System.out.println("soma das notas: " + sum);
 		
-		System.out.println("count: " + movie.getScores().size());
+		movie.getScores().forEach(x -> sum += x.getValue());		
 		double avg = sum / movie.getScores().size();
-		System.out.println("média: " + avg);
 		
 		movie.setScore(avg);
 		movie.setCount(movie.getScores().size());
 		movie = movieRepository.save(movie);
 		
-		return new MovieDto(movie);		*/
+		return new MovieDto(movie);		
 	}
 }
