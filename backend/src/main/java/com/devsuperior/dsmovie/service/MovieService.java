@@ -14,21 +14,21 @@ import com.devsuperior.dsmovie.repository.MovieRepository;
 
 @Service
 public class MovieService {
-	
+
 	@Autowired
 	private MovieRepository movieRepository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<MovieDto> findAll(Pageable pageable) {
-		
+
 		Page<Movie> result = movieRepository.findAll(pageable);
 		return result.map(x -> new MovieDto(x));
 	}
 
 	@Transactional(readOnly = true)
 	public MovieDto findAll(Long id) {
-		
-		//validar se id existe
+
+		// validar se id existe
 		Optional<Movie> result = movieRepository.findById(id);
 		return result.map(x -> new MovieDto(x)).get();
 	}
