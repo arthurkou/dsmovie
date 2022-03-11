@@ -7,7 +7,7 @@ import { BASE_URL } from "utils/requests";
 
 function Listing() {
 
-    const [pageNumber, setPageNumber] = useState(0);
+    const [pageNumber] = useState(0);
 
     //salva a página que buscou
     const[page, setPage] = useState<MoviePage>({        
