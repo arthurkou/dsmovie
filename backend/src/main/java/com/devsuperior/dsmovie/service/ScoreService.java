@@ -25,7 +25,7 @@ public class ScoreService {
 	@Autowired
 	private ScoreRepository scoreRepository;
 
-	private double sum = 0.0;
+	//private double sum = 0.0;
 	
 	@Transactional
 	public MovieDto saveScore(ScoreDto scoreDto) {
@@ -47,7 +47,11 @@ public class ScoreService {
 		
 		scoreRepository.saveAndFlush(score);
 		
-		movie.getScores().forEach(x -> sum += x.getValue());		
+		double sum = 0.0;
+		for (Score s : movie.getScores()) {
+			sum += s.getValue();
+		}		
+		
 		double avg = sum / movie.getScores().size();
 		
 		movie.setScore(avg);
